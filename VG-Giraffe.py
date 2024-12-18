@@ -1,3 +1,5 @@
+# This script runs 4 commands for the pangenome alignment: VG Giraffe, VG Stats, VG Surject, and Samtools Stats
+
 import os
 import subprocess
  
@@ -11,10 +13,11 @@ def run_command(command, output_file):
 def main():
     print("Welcome to the VG Giraffe Alignment Tool!")
     # Get user inputs
-    donor_id = input("Enter Donor ID: ")
-    sample_id = input("Enter Sample ID: ")
-    ancestry = input("Enter Patient Ancestry: ")
-    date = input("Please enter today's date (YYYY_MM_DD): ")
+    donor_id = input("Enter Donor ID: ") # This is the donor id  (first 10 values in the whole id, example: TCGA-BT-A20V)
+    sample_id = input("Enter Sample ID: ") # This is the whole sample id (example: TCGA-BT-A20V-11A-11D-A14W-08)
+    ancestry = input("Enter Patient Ancestry: ") # This is the donor's ancestry group and the directory their files are found in (for example: AA_Patients)
+    date = input("Please enter today's date (YYYY_MM_DD): ") # This is for file naming purposes 
+ 
     # Construct the directory path
     base_directory = f"../{ancestry}/{donor_id}/GRCh38_linear"
     if not os.path.exists(base_directory):
@@ -67,8 +70,7 @@ def main():
         "-m", minimizer_index[ref_choice],
         "-f", fastq_files[0],
         "-f", fastq_files[1], 
-        "-D",  "150",
-        # "-o", "gam",
+        "-D",  "150"
     ]
     align_command = [arg for arg in align_command if arg]  # Remove empty arguments
     print("Running alignment using vg giraffe...")
@@ -80,7 +82,7 @@ def main():
     print("Getting alignment statistics...")
     run_command(stats_command, output_vgstats_gam)
 
-    # Surject the file
+    # Surject the file from a GAM file to a BAM file 
     if ref_choice == "GRCh38":
         bam_directory = f"../{ancestry}/{donor_id}/GRCh38_linear"
     
