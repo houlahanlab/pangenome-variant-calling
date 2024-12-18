@@ -1,4 +1,4 @@
-# This script compares the somatic variant calling between files and can be used to see matching variants between files (you can add up to 4 files at the moment)
+# This script compares the somatic variant calling between files and can be used to see matching variants between files (you can compare up to 4 files at the moment)
 
 import pandas as pd
 from collections import defaultdict
