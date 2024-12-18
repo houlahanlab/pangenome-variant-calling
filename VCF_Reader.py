@@ -1,12 +1,11 @@
-# This code will go through the VCF file and only extract the chrosomone number, chromosome position, reference allele, and alternate allele for each variant 
+# This code will go through the VCF file and only extract the chromosome number, chromosome position, reference allele, and alternate allele for each variant 
 
 import vcf
 vcf_input_file = 'liftover_somatic150DLv1.1_markedduplicates_recalibrated_filtered_passfilter.vcf'
 vcf_output_file = 'vcf_filtered_liftover_somatic150DLv1.1_markedduplicates_recalibrated_filtered_passfilter.vcf'
 
+# Reads the VCF file 
 records = vcf.Reader(open(vcf_input_file, 'r'))
-
-# records is an iterable, from which you can get attributes such as REF, ALT, POS etc.
 
 with open(vcf_output_file, 'w') as outfile:
 
