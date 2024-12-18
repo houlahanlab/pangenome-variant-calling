@@ -1,4 +1,4 @@
-# This script creates the plots to compare the delta of 3 statistics in the pangenome alignment vs linear alignment: The Proportion of Unaligned Reads, The Proportion of Properly Paired Reads, and the Mapping Quality
+# This script creates the plots to compare the delta of 3 statistics in the T2T-CHM13 pangenome alignment vs GRCh38 linear alignment: The Proportion of Unaligned Reads, The Proportion of Properly Paired Reads, and the Mapping Quality
 # All plots have been uploaded to the OneDrive under: Results/WXS_Graphs
 
 import matplotlib.pyplot as plt
