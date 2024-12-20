@@ -36,17 +36,17 @@ def main():
 
     # Get reference genome choice
     references = {
-        "GRCh38" : "../GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.gbz",
-        "T2T-CHM13": "../T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.gbz "
+        "GRCh38" : "../../resources/GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.gbz",
+        "T2T-CHM13": "../../resources/T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.gbz "
     }
 
     dist_index = {
-        "GRCh38" : "../GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.dist",
-        "T2T-CHM13" : "../T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.dist"}
+        "GRCh38" : "../../resources/GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.dist",
+        "T2T-CHM13" : "../../resources/T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.dist"}
     
     minimizer_index = {
-        "GRCh38" : "../GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.min", 
-        "T2T-CHM13" : "../T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.min"}
+        "GRCh38" : "../../resources/GRCh38_Indexes/VG-Index-Files/hprc-v1.0-mc-grch38.min", 
+        "T2T-CHM13" : "../../resources/T2T-CHM13_Indexes/version_1.1/VG-Index-Files/hprc-v1.1-mc-chm13.d9.min"}
     
     ref_choice = input("Choose the reference genome (GRCh38 or T2T-CHM13): ")
     reference_genome = references.get(ref_choice)
