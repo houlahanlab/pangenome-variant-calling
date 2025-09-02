@@ -1,9 +1,14 @@
+# Add batch mode
+
+# Runs VG giraffe 
+# Gives option to run Recalibration and Mark Duplicates (input yes/no)
+
 import os
 import subprocess
 
 def run_command(command, output_file=None):
-    """Runs a shell command and logs output if provided."""
-    print("Executing:", " ".join(command))
+    """Runs a shell command"""
+    print("Running :", " ".join(command))
     
     if output_file:
         with open(output_file, "wb") as output:
@@ -13,7 +18,7 @@ def run_command(command, output_file=None):
         subprocess.run(command, check=True)
 
 def run_vg_giraffe():
-    print("✨💻💖 Running VG Giraffe Alignment! 💖🔬✨")
+    print("Running VG Giraffe Alignment!")
     
     # For user inputs
     donor_id = input("Enter Donor ID: ")       
@@ -22,10 +27,10 @@ def run_vg_giraffe():
     date = input("Please enter today's date (YYYY_MM_DD): ")
     
     # Base directory for input FASTQ files
-    input_base_dir = "/home/phamc20/houlahanlab/abdelf6/raw_data"
+    input_base_dir = "/home/phamc20/houlahanlab/data/data" #"/home/phamc20/houlahanlab/abdelf6/raw_data" old directory for the 25 first patients
     
     # Base directory for output files
-    output_base_dir = os.path.expanduser("~/houlahanlab/data/data")
+    output_base_dir = os.path.expanduser("~/houlahanlab/data/data/") #can delete new 
     
     # Input directory for FASTQ files
     base_directory = os.path.join(input_base_dir, ancestry, donor_id, "GRCh38_linear")
@@ -62,7 +67,7 @@ def run_vg_giraffe():
     ref_choice = input("Please choose the reference genome (GRCh38 or T2T-CHM13): ")
     reference_genome = references.get(ref_choice)
     if not reference_genome:
-        print("❌ Invalid reference genome choice.")
+        print(" Invalid reference genome choice.")
         return
 
     # Construct the output directory for pangenome alignment results using an absolute path
@@ -73,7 +78,7 @@ def run_vg_giraffe():
     elif ref_choice == "T2T-CHM13":
         alignment_directory = os.path.join(output_base_dir, ancestry, donor_id, "T2T-CHM13_pangenome")
     else:
-        print("❌ Invalid reference genome choice.")
+        print("Invalid reference genome choice.")
         return
     os.makedirs(alignment_directory, exist_ok=True)
 
@@ -104,7 +109,7 @@ def run_vg_giraffe():
     elif ref_choice == "T2T-CHM13":
         bam_directory = os.path.join(output_base_dir, ancestry, donor_id, "T2T-CHM13_linear")
     else:
-        print("❌ Invalid reference genome choice.")
+        print(" Invalid reference genome choice.")
         return
     os.makedirs(bam_directory, exist_ok=True)
 
@@ -126,15 +131,15 @@ def run_vg_giraffe():
     # Run Samtools Stats on the surjected BAM file and output stats
     surjected_bam_stats = os.path.join(bam_directory, f"{date}_{sample_id}_{ref_choice}_pangenome_fragment_length-150_aligned_surjected_stats.txt")
     surject_stats_command = ["samtools", "stats", surjected_bam]
-    print("💻 Getting surjection statistics...")
+    print("Getting surjection statistics...")
     run_command(surject_stats_command, surjected_bam_stats)
 
-    print("✅All processes completed successfully! Have a nice day!")
+    print(" All processes completed successfully! Have a nice day!")
 
     return sample_id, date, ancestry, donor_id, ref_choice
 
 def run_recal_markdup(sample_id, date, ancestry, donor_id, ref_choice):
-    print("✨💻💖 Running Recalibration and MarkDuplicates Processing! 💖🔬✨")
+    print("Running Recalibration and MarkDuplicates Processing!")
     
     # Define input and output directories
     base_dir = f"/home/phamc20/houlahanlab/data/data/{ancestry}/{donor_id}/T2T-CHM13_linear" # figure out relative path...
@@ -147,10 +152,10 @@ def run_recal_markdup(sample_id, date, ancestry, donor_id, ref_choice):
             break
 
     if not input_bam:
-        print(f"❌ Error: Could not find a BAM file for sample ID {sample_id} in {base_dir}.")
+        print(f" Error: Could not find a BAM file for sample ID {sample_id} in {base_dir}.")
         return
 
-    print(f"✅ Found input BAM file: {input_bam}")
+    print(f" Found input BAM file: {input_bam}")
 
     # Ooutput filenames
     rg_bam = f"{base_dir}/{sample_id}_CHM13_RG.bam"
@@ -211,8 +216,8 @@ def run_recal_markdup(sample_id, date, ancestry, donor_id, ref_choice):
     print("Indexing Recalibrated BAM files")
     run_command(["samtools", "index", recalibrated_bam])
 
-    print(f"🎉✅ Vg Giraffe and Recalibration/Markduplicates completed successfully! All output files are stored in:")
-    print(f"📁 {recalibrated_bam}")
+    print(f" Vg Giraffe and Recalibration/Markduplicates completed successfully! All output files are stored in:")
+    print(f" {recalibrated_bam}")
 
 def main():
     sample_id, date, ancestry, donor_id, ref_choice = run_vg_giraffe()
