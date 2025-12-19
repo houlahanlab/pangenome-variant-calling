@@ -1,0 +1,202 @@
+---
+title: "figure2_consensus_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+consensus <- megatable[c("Donor_ID", "Reference", "Consensus_Precision", "Consensus_Recall", "Consensus_F1_Score")]
+consensus$Variant_Caller <- "Consensus"
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+consensus_color <- c("#5592D9")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+```
+
+# Plot template
+```{r}
+consensus_boxplot <- function(data, plot_title, legend_pos) {
+  
+  set.seed(1)
+  result <- ggplot(data, aes(Metric, Value, fill=Variant_Caller)) + 
+     annotate(
+      "rect",
+      xmin = -Inf, xmax = 1.5,      
+      ymin = -Inf, ymax = Inf,   
+      alpha = 0.2,                
+      fill = "grey") +
+    stat_boxplot(
+      geom = "errorbar", 
+      width = 0.3, 
+      color = "black", 
+      size = 0.6) +
+    geom_boxplot(
+      width = 0.6, 
+      outlier.shape = NA, 
+      alpha = 1, 
+      color = "black", 
+      size = 0.6) +
+    labs(
+#      title = title, 
+      x = element_blank(), 
+      y = "Metric Percentage (%)") +
+    scale_x_discrete(labels = c(
+      "F1_Score" = "F1 Score",
+      "Precision" = "Precision",
+      "Recall" = "Recall"
+    )) +
+    scale_y_continuous(
+      limits = c(-1, 100),
+      breaks = seq(-100, 100, 20)) +
+    scale_fill_manual(
+      values = consensus_color) +
+    scale_color_manual(
+      values = "black",
+      name = "Variant Caller") +
+    geom_jitter(
+      width = 0.1,
+      size = 2,
+      shape = 21,
+      aes(color = Variant_Caller),
+      fill = NA,
+      alpha = 0.9
+    ) +
+    guides(
+    color = guide_legend(override.aes = list(shape = 22,
+                                             size = 6,
+                                             fill = consensus_color, 
+                                             color = "black")), 
+    fill  = "none") +
+    theme(
+      legend.position = legend_pos,
+      # legend.position.inside = c(0.75, 0.07),
+      legend.background = element_rect(fill = "white", color = NA),
+      legend.title = element_text(size = 18),
+      legend.text = element_text(size = 18),
+      panel.background = element_rect(fill = "white"),
+      # panel.grid.major.y = element_line(color = "#F0F0F0"),
+      # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+      plot.title = element_text(hjust = 0.5, size = 18),
+      axis.text.x = element_text(size = 18, color = "black"),
+      axis.text.y = element_text(size = 18, color = "black"),
+      axis.title.y = element_text(size = 20), 
+      panel.border = element_blank(),
+      axis.line.x.bottom = element_line(color = "black"),
+      axis.line.y.left   = element_line(color = "black")
+    ) +
+    annotate(
+      "text",
+      x = 0.5, y = Inf,
+      label = plot_title,
+      size = 6,
+      color = "black",
+      hjust = 0, 
+      vjust = 2
+    )
+  
+  return(result)
+}
+```
+
+
+===============
+# Pangenome
+===============
+
+# Filter only Pangenome data 
+```{r}
+consensus_pan <- consensus[consensus$Reference == "Pangenome", ]
+
+consensus_pan <- rename_col(consensus_pan)
+consensus_pan <- as_numeric(consensus_pan)
+
+consensus_long_pan <- data.frame(
+  Donor_ID = rep(consensus_pan$Donor_ID, times = 3),
+  Variant_Caller = rep(consensus_pan$Variant_Caller, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), 
+               each = nrow(consensus_pan)),
+  Value  = c(consensus_pan$F1_Score, 
+             consensus_pan$Precision, 
+             consensus_pan$Recall)
+)
+```
+
+# Plot Pangenome
+```{r}
+set.seed(1)
+consensus_pan_output <- consensus_boxplot(consensus_long_pan, "Pangenome", "none")
+
+consensus_pan_output
+```
+
+# Save Pangenome
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/supp3_consensus_boxplot_pangenome.pdf", plot = consensus_pan_output, width = 5, height = 6, dpi = 300)
+```
+
+
+===============
+# Linear
+===============
+
+# Filter only Linear data 
+```{r}
+consensus_lin <- consensus[consensus$Reference == "Linear", ]
+
+consensus_lin <- rename_col(consensus_lin)
+consensus_lin <- as_numeric(consensus_lin)
+
+consensus_long_lin <- data.frame(
+  Donor_ID = rep(consensus_lin$Donor_ID, times = 3),
+  Variant_Caller = rep(consensus_lin$Variant_Caller, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), 
+               each = nrow(consensus_lin)),
+  Value  = c(consensus_lin$F1_Score, 
+             consensus_lin$Precision, 
+             consensus_lin$Recall)
+)
+```
+
+# Plot Linear
+```{r}
+set.seed(1)
+consensus_lin_output <- consensus_boxplot(consensus_long_lin, "Linear", "nones")
+
+consensus_lin_output
+```
+
+# Save Linear
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/supp3_consensus_boxplot_linear.pdf", plot = consensus_lin_output, width = 5, height = 6, dpi = 300)
+```
