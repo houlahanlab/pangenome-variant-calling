@@ -1,0 +1,107 @@
+---
+title: "figure1_ancestry_scores_by_ancestry"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+library(readxl)
+
+ancestry_colors <- c("#add8e6", "#FEF5C3", "#fdc0cb")
+```
+
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+
+proportion <- megatable[c("Donor_ID", "Ancestry", "AA_Admixture_Proportion", "EA_Admixture_Proportion", "EAA_Admixture_Proportion")]
+```
+
+```{r}
+colnames(proportion)[colnames(proportion) == "AA_Admixture_Proportion"] <- "AA"
+colnames(proportion)[colnames(proportion) == "EA_Admixture_Proportion"] <- "EA"
+colnames(proportion)[colnames(proportion) == "EAA_Admixture_Proportion"] <- "EAA"
+```
+
+```{r}
+boxplot <- function(y_var, y_label) {
+  
+  y_var <- ensym(y_var)
+  
+  set.seed(1)
+  ggplot(proportion, aes(Ancestry, !!y_var, fill = Ancestry)) + 
+    stat_boxplot(
+      geom = "errorbar", 
+      width = 0.3, 
+      color = "black", 
+      size = 0.6) +
+    geom_boxplot(
+      width = 0.6,
+      outlier.shape = NA,
+      alpha = 1,
+      color = "black",
+      size = 0.6) +
+    labs(
+      # title = plot_title, 
+      x = element_blank(), 
+      y = y_label) +
+    scale_y_continuous(
+      limits = c(0, 1)) +
+    scale_x_discrete(labels = c(
+      "AA_Patients" = "African",
+      "EA_Patients" = "European",
+      "EAA_Patients" = "East Asian")) +
+    scale_fill_manual(
+      values = ancestry_colors) +
+    geom_jitter(
+      width = 0.1,
+      size = 2,
+      shape = 21,
+      fill = NA,
+      alpha = 0.9) +
+    theme(
+      legend.position = "none",
+      legend.position.inside = c(0.88, 0.88),
+      legend.background = element_rect(fill = "white", color = NA),
+      legend.title = element_text(size = 18),
+      legend.text = element_text(size = 18),
+      panel.background = element_rect(fill = "white"),
+      # panel.grid.major.y = element_line(color = "#F0F0F0"),
+      # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+      plot.title = element_text(hjust = 0.5, size = 18),
+      axis.text.x = element_text(size = 16, color = "black"),
+      axis.text.y = element_text(size = 18, color = "black"),
+      axis.title.y = element_text(size = 20),  
+      panel.border = element_blank(),
+      axis.line.x.bottom = element_line(color = "black"),
+      axis.line.y.left   = element_line(color = "black")
+    ) 
+}
+```
+
+```{r}
+AA_output <- boxplot(AA, "Admixture % African Ancestry")
+AA_output
+ggsave("./plot/supp1_ancestry_score_boxplot_AA.pdf", AA_output, width = 5, height = 6, dpi = 300)
+```
+
+```{r}
+EA_output <- boxplot(EA, "Admixture % European Ancestry")
+EA_output
+ggsave("./plot/supp1_ancestry_score_boxplot_EA.pdf", EA_output, width = 5, height = 6, dpi = 300)
+```
+
+```{r}
+EAA_output <- boxplot(EAA, "Admixture % East Asian Ancestry")
+EAA_output
+ggsave("./plot/supp1_ancestry_score_boxplot_EAA.pdf", EAA_output, width = 5, height = 6, dpi = 300)
+```
+
+
+

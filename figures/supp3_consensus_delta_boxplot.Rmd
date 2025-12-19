@@ -1,0 +1,175 @@
+---
+title: "figure2_consensus_delta_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+consensus <- megatable[c("Donor_ID", "Reference", "Consensus_Precision", "Consensus_Recall", "Consensus_F1_Score")]
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+consensus_color <- c("#5592D9")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+
+delta_diff <- function(data) {
+  pan <- data[data$Reference == "Pangenome", ]
+  lin  <- data[data$Reference == "Linear", ]
+  
+  merged <- merge(pan, lin, by = "Donor_ID", suffixes = c("_Pangenome", "_Linear"))
+  
+  result <- data.frame(
+    Donor_ID       = merged$Donor_ID,
+    Variant_Caller = "Consensus",
+    Delta_Recall    = merged$Recall_Pangenome - merged$Recall_Linear,
+    Delta_Precision = merged$Precision_Pangenome - merged$Precision_Linear,
+    Delta_F1_Score  = merged$F1_Score_Pangenome - merged$F1_Score_Linear
+  )
+  
+  return(result)
+}
+```
+
+# Calculate delta difference
+```{r}
+consensus <- rename_col(consensus)
+consensus <- as_numeric(consensus)
+delta_consensus <- delta_diff(consensus)
+
+consensus_long <- data.frame(
+  Donor_ID = rep(delta_consensus$Donor_ID, times = 3),
+  Variant_Caller = rep(delta_consensus$Variant_Caller, times = 3),
+  Metric = rep(c("Delta_F1_Score", "Delta_Precision", "Delta_Recall"), 
+               each = nrow(delta_consensus)),
+  Value  = c(delta_consensus$Delta_F1_Score, 
+             delta_consensus$Delta_Precision, 
+             delta_consensus$Delta_Recall)
+)
+```
+
+
+# Plot
+```{r}
+set.seed(1)
+consensus_output <- ggplot(consensus_long, aes(Metric, Value, fill=Variant_Caller)) + 
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey") +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) +
+  geom_boxplot(
+    width = 0.6, 
+    outlier.shape = NA, 
+    alpha = 1, 
+    color = "black", 
+    size = 0.6) +
+  labs(
+    # title = plot_title, 
+    x = element_blank(), 
+    y = expression(paste(Delta, " Metric Percentage (%)"))) +
+  scale_x_discrete(labels = c(
+    "Delta_F1_Score" = "F1 Score",
+    "Delta_Precision" = "Precision",
+    "Delta_Recall" = "Recall"),
+    expand = expansion(mult = c(0.4, 0.3))) +
+  scale_y_continuous(
+    limits = c(-62, 50),
+    breaks = seq(-100, 100, 20)) +
+  scale_fill_manual(
+    values = consensus_color) +
+  scale_color_manual(
+    values = "black",
+    name = element_blank()) +
+  geom_jitter(
+    width = 0.1,
+    size = 2,
+    shape = 21,
+    aes(color = Variant_Caller),
+    fill = NA,
+    alpha = 0.9
+  ) +
+  guides(
+    color = guide_legend(override.aes = list(shape = 22,
+                                             size = 6,
+                                             fill = consensus_color,
+                                             color = "black")),
+    fill = "none") +
+  theme(
+    text = element_text(family = "Helvetica"),
+    legend.position = "inside",
+    legend.position.inside = c(0.75, 0.05),
+    legend.background = element_rect(fill = NA, color = NA),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black")
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Pangenome - Linear",
+    size = 6,
+    color = "black",
+    hjust = 0,
+    vjust = 2,
+    family = "Helvetica"
+  )
+
+consensus_output
+```
+
+```{r}
+ggsave("./plot/supp3_consensus_boxplot_delta_pangenome_linear.pdf", plot = consensus_output, width = 5, height = 6, dpi = 300)
+```
+
+
+
+
+

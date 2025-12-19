@@ -1,0 +1,345 @@
+---
+title: "figure3_ancestry_delta_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+
+strelka <- megatable[c("Donor_ID", "Ancestry", "Reference", "Strelka_Precision", "Strelka_Recall", "Strelka_F1_Score")]
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+ancestry_colors <- c("#add8e6", "#FEF5C3", "#fdc0cb")
+black_colors <- c("black", "black", "black")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+
+delta_diff <- function(data) {
+  pan <- data[data$Reference == "Pangenome", ]
+  lin  <- data[data$Reference == "Linear", ]
+  
+  merged <- merge(pan, lin, by = "Donor_ID", suffixes = c("_Pangenome", "_Linear"))
+  
+  result <- data.frame(
+    Donor_ID        = merged$Donor_ID,
+    Ancestry        = merged$Ancestry_Pangenome,
+    Delta_Recall    = merged$Recall_Pangenome - merged$Recall_Linear,
+    Delta_Precision = merged$Precision_Pangenome - merged$Precision_Linear,
+    Delta_F1_Score  = merged$F1_Score_Pangenome - merged$F1_Score_Linear
+  )
+  
+  return(result)
+}
+```
+
+# Process
+```{r}
+strelka <- rename_col(strelka)
+strelka <- as_numeric(strelka)
+
+delta_strelka <- delta_diff(strelka)
+
+delta_strelka$Ancestry <- factor(
+  delta_strelka$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+strelka_long <- data.frame(
+  Donor_ID = rep(delta_strelka$Donor_ID, times = 3),
+  Ancestry = rep(delta_strelka$Ancestry, times = 3),
+  Metric = rep(c("Delta_F1_Score", "Delta_Precision", "Delta_Recall"), 
+               each = nrow(delta_strelka)),
+  Value  = c(delta_strelka$Delta_F1_Score, 
+             delta_strelka$Delta_Precision, 
+             delta_strelka$Delta_Recall)
+)
+```
+
+# Plot
+```{r}
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+
+set.seed(1)
+boxplot_output <- ggplot(strelka_long, aes(Metric, Value, fill=Ancestry)) +
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey"                
+  ) +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6,
+    position = dodge) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1, 
+    color = "black", 
+    size = 0.6, 
+    position = dodge) +
+  labs(
+    # title = plot_title, 
+    x = element_blank(), 
+    y = expression(paste(Delta, " Metric Percentage (%)"))) +
+  scale_x_discrete(labels = c(
+    "Delta_F1_Score" = "F1 Score",
+    "Delta_Precision" = "Precision",
+    "Delta_Recall" = "Recall")) +
+  scale_y_continuous(
+    limits = c(-64, 64),
+    breaks = seq(-100, 100, 20)) +
+  scale_fill_manual(
+    values = ancestry_colors,
+    name = "Ancestry",
+    labels = c(
+      "AA_Patients" = "African",
+      "EA_Patients" = "European",
+      "EAA_Patients" = "East Asian")) +
+  scale_color_manual(
+    values = black_colors,
+    name = "Ancestry",
+    labels = c(
+      "AA_Patients" = "African",
+      "EA_Patients" = "European",
+      "EAA_Patients" = "East Asian")) +
+  geom_jitter(
+    size = 2,
+    shape = 21,
+    aes(color = Ancestry),
+    fill = NA,
+    alpha = 0.9,
+    position = jitterdodge) +
+  theme(
+    legend.position = "none",
+    # legend.position.inside = c(0.92, 0.15),
+    # legend.background = element_rect(fill = "white", color = "black"),
+    # legend.title = element_text(size = 14),
+    # legend.text = element_text(size = 14),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black"),
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Strelka Pangenome - Linear",
+    size = 7,
+    color = "black",
+    hjust = 0,
+    vjust = 2) +
+  geom_vline(
+    xintercept = c(1.5, 2.5), 
+    linetype = "dashed", 
+    color = "grey", 
+    size = 0.6)
+
+boxplot_output
+```
+
+# Save Pangenome Plot
+```{r}
+ggsave("./plot/supp4_ancestry_boxplot_strelka_delta_pangenome_linear.pdf", boxplot_output, width = 13, height = 6, dpi = 300)
+```
+
+--------------------------------------------------------------------------------
+
+# Ploting Template for F1 Score Only
+```{r}
+f1_boxplot <- function(data, label, lim_low, lim_high, bg_fill, y_break, vjust) {
+
+set.seed(1)
+ggplot(data, aes(Ancestry, Delta_F1_Score, fill = Ancestry)) + 
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1,
+    color = "black",
+    size = 0.6) +
+  labs(
+    # title = plot_title, 
+    x = "F1 Score", 
+    y = expression(paste(Delta, " Delta Percentage (%)"))) +
+  scale_x_discrete(labels = c(
+    "AA_Patients" = "African",
+    "EA_Patients" = "European",
+    "EAA_Patients" = "East Asian"),
+    expand = expansion(mult = c(0.4, 0.3))
+    )  +
+  scale_y_continuous(
+    limits = c(lim_low, lim_high),
+    breaks = seq(-100, 100, y_break)) +
+  scale_fill_manual(
+    values = ancestry_colors) +
+  geom_jitter(
+    width = 0.1,
+    size = 2,
+    shape = 21,
+    fill = NA,
+    alpha = 0.9) +
+  theme(
+    legend.position = "none",
+    # legend.position = legend,
+    # legend.position.inside = c(pos_x, pos_y),
+    # legend.background = element_rect(fill = "white", color = NA),
+    # legend.title = element_text(size = 18),
+    # legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = bg_fill),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    # axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20),  
+    axis.title.x = element_text(size = 20),
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black"),
+    # axis.ticks.x = element_blank()
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = label,
+    size = 6,
+    color = "black",
+    hjust = 0,
+    vjust = vjust
+  )
+
+}
+```
+
+====================
+# Strelka F1 Score
+====================
+```{r}
+strelka <- rename_col(strelka)
+strelka <- as_numeric(strelka)
+
+delta_strelka <- delta_diff(strelka)
+
+delta_strelka$Ancestry <- factor(
+  delta_strelka$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+strelka_output <- f1_boxplot(delta_strelka, "Strelka Pangenome - Linear", -45, 45, "#F2F2F2", 20, 2)
+
+strelka_output
+```
+
+
+```{r}
+ggsave("./plot/figure2_ancestry_boxplot_f1_strelka_delta_pangenome_linear.pdf", strelka_output, width = 5, height = 6, dpi = 300)
+```
+
+
+
+====================
+# Mutect F1 Score
+====================
+
+```{r}
+mutect <- read.table("/workspace/lab/houlahanlab/phamc20/data/Stats_Summary/Mutect2/mega_stats_table.txt", header = TRUE, sep = "\t")
+
+mutect <- rename_col(mutect)
+mutect <- as_numeric(mutect)
+
+delta_mutect <- delta_diff(mutect)
+
+delta_mutect$Ancestry <- factor(
+  delta_mutect$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+mutect_output <- f1_boxplot(delta_mutect, "Mutect2\nPangenome - Linear", -15, 15, "white", 5, 1.3)
+
+mutect_output
+```
+
+
+```{r}
+ggsave("./plot/supp4_ancestry_boxplot_mutect_delta_pangenome_linear.pdf", mutect_output, width = 4.5, height = 6, dpi = 300)
+```
+
+==========================
+# Somatic Sniper F1 Score
+==========================
+
+```{r}
+somatic <- read.table("/workspace/lab/houlahanlab/phamc20/data/Stats_Summary/SomaticSniper/mega_stats_table.txt", header = TRUE, sep = "\t")
+
+somatic <- rename_col(somatic)
+somatic <- as_numeric(somatic)
+
+delta_somatic <- delta_diff(somatic)
+
+delta_somatic$Ancestry <- factor(
+  delta_somatic$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+somatic_output <- f1_boxplot(delta_somatic, "Somatic Sniper\nPangenome - Linear", -15, 15, "white", 5, 1.3)
+
+somatic_output
+```
+
+
+```{r}
+ggsave("./plot/supp4_ancestry_boxplot_somatic_delta_pangenome_linear.pdf", somatic_output, width = 4.5, height = 6, dpi = 300)
+```

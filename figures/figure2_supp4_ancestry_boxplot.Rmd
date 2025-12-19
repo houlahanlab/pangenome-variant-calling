@@ -1,0 +1,385 @@
+---
+title: "figure3_ancestry_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+===============
+# General Setup
+===============
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+
+strelka <- megatable[c("Donor_ID", "Ancestry", "Reference", "Strelka_Precision", "Strelka_Recall", "Strelka_F1_Score")]
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+ancestry_colors <- c("#add8e6", "#FEF5C3", "#fdc0cb")
+black_colors <- c("black", "black", "black")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+```
+
+# Process
+```{r}
+strelka <- rename_col(strelka)
+strelka <- as_numeric(strelka)
+```
+
+# Plot Template
+```{r}
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+
+ancestry_boxplot <- function(data, plot_title) {
+  set.seed(1)
+  boxplot_pan <- ggplot(data, aes(Metric, Value, fill=Ancestry)) + 
+    annotate(
+      "rect",
+      xmin = -Inf, xmax = 1.5,      
+      ymin = -Inf, ymax = Inf,   
+      alpha = 0.2,                
+      fill = "grey"                
+    ) +
+    stat_boxplot(
+      geom = "errorbar", 
+      width = 0.3, 
+      color = "black", 
+      size = 0.6,
+      position = dodge) +
+    geom_boxplot(
+      width = 0.6,
+      outlier.shape = NA,
+      alpha = 1,
+      color = "black",
+      size = 0.6,
+      position = dodge) +
+    labs(
+      # title = plot_title, 
+      x = element_blank(), 
+      y = "Metric Percentage (%)") +
+    scale_x_discrete(labels = c(
+      "F1_Score" = "F1 Score",
+      "Precision" = "Precision",
+      "Recall" = "Recall"))  +
+    scale_y_continuous(
+      limits = c(-1, 100),
+      breaks = seq(0, 100, 20)) +
+    scale_fill_manual(
+      values = ancestry_colors,
+      name = "Ancestry",
+      labels = c(
+          "AA_Patients" = "African",
+          "EA_Patients" = "European",
+          "EAA_Patients" = "East Asian")) +
+    scale_color_manual(
+      values = black_colors,
+      name = "Ancestry",
+      labels = c(
+        "AA_Patients" = "African",
+        "EA_Patients" = "European",
+        "EAA_Patients" = "East Asian")) +
+    geom_jitter(
+      size = 2,
+      shape = 21,
+      aes(color = Ancestry),
+      fill = NA,
+      alpha = 0.9,
+      position = jitterdodge) +
+    guides(
+      color = guide_legend(override.aes = list(shape = 22,
+                                               size = 6,
+                                               fill = ancestry_colors, 
+                                               color = "black")), 
+      fill  = "none") +
+    theme(
+      legend.position = "inside",
+      legend.position.inside = c(0.92, 0.15),
+      legend.background = element_rect(fill = "white", color = NA),
+      legend.title = element_text(size = 18),
+      legend.text = element_text(size = 18),
+      panel.background = element_rect(fill = "white"),
+      # panel.grid.major.y = element_line(color = "#F0F0F0"),
+      # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+      plot.title = element_text(hjust = 0.5, size = 18),
+      axis.text.x = element_text(size = 18, color = "black"),
+      axis.text.y = element_text(size = 18, color = "black"),
+      axis.title.y = element_text(size = 20), 
+      panel.border = element_blank(),
+      axis.line.x.bottom = element_line(color = "black"),
+      axis.line.y.left   = element_line(color = "black")
+    ) +
+    annotate(
+      "text",
+      x = 0.5, y = Inf,
+      label = plot_title,
+      size = 7,
+      color = "black",
+      hjust = 0,
+      vjust = 2
+    ) +
+    geom_vline(
+      xintercept = c(1.5, 2.5), 
+      linetype = "dashed", 
+      color = "grey", 
+      size = 0.6)
+}
+```
+
+
+====================
+# Strelka Pangenome
+====================
+
+# Plot
+```{r}
+strelka_pan <- strelka[strelka$Reference == "Pangenome", ]
+strelka_pan$Ancestry <- factor(
+  strelka_pan$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+strelka_long_pan <- data.frame(
+  Donor_ID = rep(strelka_pan$Donor_ID, times = 3),
+  Ancestry = rep(strelka_pan$Ancestry, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(strelka_pan)),
+  Value  = c(strelka_pan$F1_Score, strelka_pan$Precision, strelka_pan$Recall)
+)
+
+strelka_pan_out <- ancestry_boxplot(strelka_long_pan, "Strelka Pangenome")
+
+strelka_pan_out
+```
+
+# Save
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/figure2_ancestry_boxplot_strelka_pangenome.pdf", strelka_pan_out, width = 13, height = 6, dpi = 300)
+```
+
+
+================
+# Strelka Linear
+================
+
+# Plot
+```{r}
+strelka_lin <- strelka[strelka$Reference == "Linear", ]
+strelka_lin$Ancestry <- factor(
+  strelka_lin$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+strelka_long_lin <- data.frame(
+  Donor_ID = rep(strelka_lin$Donor_ID, times = 3),
+  Ancestry = rep(strelka_lin$Ancestry, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(strelka_lin)),
+  Value  = c(strelka_lin$F1_Score, strelka_lin$Precision, strelka_lin$Recall)
+)
+
+strelka_lin_out <- ancestry_boxplot(strelka_long_lin, "Strelka Linear")
+
+strelka_lin_out
+```
+
+# Save
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/supp4_ancestry_boxplot_strelka_linear.pdf", strelka_lin_out, width = 9, height = 6, dpi = 300)
+```
+
+
+# Plot Template without Legend
+```{r}
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+
+ancestry_boxplot_2 <- function(data, plot_title) {
+  set.seed(1)
+  boxplot_pan <- ggplot(data, aes(Metric, Value, fill=Ancestry)) + 
+    annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey"                
+  ) +
+    stat_boxplot(
+      geom = "errorbar", 
+      width = 0.3, 
+      color = "black", 
+      size = 0.6,
+      position = dodge) +
+    geom_boxplot(
+      width = 0.6,
+      outlier.shape = NA,
+      alpha = 1,
+      color = "black",
+      size = 0.6,
+      position = dodge) +
+    labs(
+      # title = plot_title, 
+      x = element_blank(), 
+      y = "Metric Percentage (%)") +
+    scale_x_discrete(labels = c(
+      "F1_Score" = "F1 Score",
+      "Precision" = "Precision",
+      "Recall" = "Recall"))  +
+    scale_y_continuous(
+      limits = c(-1, 100),
+      breaks = seq(0, 100, 20)) +
+    scale_fill_manual(
+      values = ancestry_colors,
+      name = "Ancestry",
+      labels = c(
+          "AA_Patients" = "African",
+          "EA_Patients" = "European",
+          "EAA_Patients" = "East Asian")) +
+    scale_color_manual(
+      values = black_colors,
+      name = "Ancestry",
+      labels = c(
+        "AA_Patients" = "African",
+        "EA_Patients" = "European",
+        "EAA_Patients" = "East Asian")) +
+    geom_jitter(
+      size = 2,
+      shape = 21,
+      aes(color = Ancestry),
+      fill = NA,
+      alpha = 0.9,
+      position = jitterdodge) +
+    theme(
+      legend.position = "none",
+      # legend.position.inside = c(0.91, 0.11),
+      # legend.background = element_rect(fill = "white", color = NA),
+      # legend.title = element_text(size = 18),
+      # legend.text = element_text(size = 18),
+      panel.background = element_rect(fill = "white"),
+      # panel.grid.major.y = element_line(color = "#F0F0F0"),
+      # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+      plot.title = element_text(hjust = 0.5, size = 18),
+      axis.text.x = element_text(size = 18, color = "black"),
+      axis.text.y = element_text(size = 18, color = "black"),
+      axis.title.y = element_text(size = 20), 
+      panel.border = element_blank(),
+      axis.line.x.bottom = element_line(color = "black"),
+      axis.line.y.left   = element_line(color = "black")
+    ) +
+    annotate(
+      "text",
+      x = 0.5, y = Inf,
+      label = plot_title,
+      size = 7,
+      color = "black",
+      hjust = 0,
+      vjust = 2
+    ) +
+    geom_vline(
+      xintercept = c(1.5, 2.5), 
+      linetype = "dashed", 
+      color = "grey", 
+      size = 0.6)
+}
+```
+
+
+====================
+# Mutect2 Pangenome
+====================
+
+# Plot
+```{r}
+mutect <- read.table("/workspace/lab/houlahanlab/phamc20/data/Stats_Summary/Mutect2/mega_stats_table.txt", header = TRUE, sep = "\t")
+
+mutect <- rename_col(mutect)
+mutect <- as_numeric(mutect)
+
+mutect_pan <- mutect[mutect$Reference == "Pangenome", ]
+mutect_pan$Ancestry <- factor(
+  mutect_pan$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+mutect_long_pan <- data.frame(
+  Donor_ID = rep(mutect_pan$Donor_ID, times = 3),
+  Ancestry = rep(mutect_pan$Ancestry, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(mutect_pan)),
+  Value  = c(mutect_pan$F1_Score, mutect_pan$Precision, mutect_pan$Recall)
+)
+
+mutect_pan_out <- ancestry_boxplot_2(mutect_long_pan, "Mutect2 Pangenome")
+
+mutect_pan_out
+```
+
+# Save
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/supp4_ancestry_boxplot_mutect_pangenome.pdf", mutect_pan_out, width = 9, height = 6, dpi = 300)
+```
+
+
+===========================
+# Somatic Sniper Pangenome
+===========================
+
+# Plot
+```{r}
+somatic <- read.table("/workspace/lab/houlahanlab/phamc20/data/Stats_Summary/SomaticSniper/mega_stats_table.txt", header = TRUE, sep = "\t")
+
+somatic <- rename_col(somatic)
+somatic <- as_numeric(somatic)
+
+somatic_pan <- somatic[somatic$Reference == "Pangenome", ]
+somatic_pan$Ancestry <- factor(
+  somatic_pan$Ancestry,
+  levels = c("AA_Patients", "EA_Patients", "EAA_Patients")
+)
+
+somatic_long_pan <- data.frame(
+  Donor_ID = rep(somatic_pan$Donor_ID, times = 3),
+  Ancestry = rep(somatic_pan$Ancestry, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(somatic_pan)),
+  Value  = c(somatic_pan$F1_Score, somatic_pan$Precision, somatic_pan$Recall)
+)
+
+somatic_pan_out <- ancestry_boxplot_2(somatic_long_pan, "Somatic Sniper Pangenome")
+
+somatic_pan_out
+```
+
+# Save
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/supp4_ancestry_boxplot_somatic_pangenome.pdf", somatic_pan_out, width = 9, height = 6, dpi = 300)
+```
+
+
