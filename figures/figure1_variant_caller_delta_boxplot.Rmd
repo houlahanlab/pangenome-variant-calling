@@ -1,0 +1,206 @@
+---
+title: "figure2_variant_caller_delta_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+
+strelka <- megatable[c("Donor_ID", "Reference", "Strelka_Precision", "Strelka_Recall", "Strelka_F1_Score")]
+somatic <- megatable[c("Donor_ID", "Reference", "Somatic_Precision", "Somatic_Recall", "Somatic_F1_Score")]
+mutect <- megatable[c("Donor_ID", "Reference", "Mutect_Precision", "Mutect_Recall", "Mutect_F1_Score")]
+
+strelka$Variant_Caller <- "Strelka"
+somatic$Variant_Caller <- "SomaticSniper"
+mutect$Variant_Caller <- "Mutect2"
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+colors <- c("#e5d9ff", "#f1a1ff", "#9c8fff")
+black_colors <- c("black", "black", "black")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+
+strelka <- rename_col(strelka)
+somatic <- rename_col(somatic)
+mutect <- rename_col(mutect)
+
+strelka <- as_numeric(strelka)
+somatic <- as_numeric(somatic)
+mutect <- as_numeric(mutect)
+```
+
+# Calculate delta difference
+```{r}
+delta_diff <- function(data) {
+  pan <- data[data$Reference == "Pangenome", ]
+  lin  <- data[data$Reference == "Linear", ]
+  
+  merged <- merge(pan, lin, by = "Donor_ID", suffixes = c("_Pangenome", "_Linear"))
+  
+  result <- data.frame(
+    Donor_ID       = merged$Donor_ID,
+    Variant_Caller = merged$Variant_Caller_Pangenome,
+    Delta_Recall    = merged$Recall_Pangenome - merged$Recall_Linear,
+    Delta_Precision = merged$Precision_Pangenome - merged$Precision_Linear,
+    Delta_F1_Score  = merged$F1_Score_Pangenome - merged$F1_Score_Linear
+  )
+  
+  return(result)
+}
+```
+
+# Calculate delta pangenome - linear
+```{r}
+delta_strelka <- delta_diff(strelka)
+delta_somatic <- delta_diff(somatic)
+delta_mutect <- delta_diff(mutect)
+```
+
+# Combine data
+```{r}
+combined <- rbind(delta_strelka, delta_somatic, delta_mutect)
+combined$Variant_Caller <- factor(
+  combined$Variant_Caller,
+  levels = c("SomaticSniper", "Strelka", "Mutect2")
+)
+```
+
+# Plotting
+```{r}
+combined_long <- data.frame(
+  Variant_Caller = rep(combined$Variant_Caller, times = 3),
+  Metric = rep(c("Delta_F1_Score", "Delta_Precision", "Delta_Recall"), each = nrow(combined)),
+  Value  = c(combined$Delta_F1_Score, combined$Delta_Precision, combined$Delta_Recall)
+)
+
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+
+set.seed(1)
+plot_output <- ggplot(combined_long, aes(Metric, Value, fill=Variant_Caller)) +
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey") +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6,
+    position = dodge) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1, 
+    color = "black", 
+    size = 0.6, 
+    position = dodge) +
+  labs(
+    # title = plot_title, 
+    x = element_blank(), 
+    y = expression(paste(Delta, " Metric Percentage (%)"))) +
+  scale_x_discrete(labels = c(
+    "Delta_F1_Score" = "F1 Score",
+    "Delta_Precision" = "Precision",
+    "Delta_Recall" = "Recall"))  +
+  scale_y_continuous(
+    limits = c(-65, 65),                  
+    breaks = seq(-100, 100, 20)) +
+  scale_fill_manual(
+    values = colors,
+    name = "Variant Caller",
+    labels = c(
+        "SomaticSniper" = "Somatic Sniper",
+        "Strelka" = "Strelka",
+        "Mutect2" = "Mutect2")) +
+  scale_color_manual(
+    values = black_colors,
+    name = "Variant Caller",
+    labels = c(
+        "SomaticSniper" = "Somatic Sniper",
+        "Strelka" = "Strelka",
+        "Mutect2" = "Mutect2")) +
+  geom_jitter(
+    size = 2,
+    shape = 21,
+    aes(color = Variant_Caller),
+    fill = NA,
+    alpha = 0.9,
+    position = jitterdodge) +
+  theme(
+    text = element_text(family = "Helvetica"),
+    legend.position = "none",
+    # legend.position = "inside",
+    legend.position.inside = c(0.9, 0.85),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black"),
+    # plot.margin = margin(5.5, 50, 5.5, 5.5)
+    ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Pangenome - Linear",
+    size = 7,
+    color = "black",
+    hjust = 0,
+    vjust = 2,
+    family = "Helvetica") +
+  geom_vline(
+    xintercept = c(1.5, 2.5), 
+    linetype = "dashed", 
+    color = "grey", 
+    size = 0.6)
+
+plot_output
+```
+
+```{r}
+ggsave("./plot/figure1_variant_caller_boxplot_delta_pangenome_linear.pdf", plot_output, width = 13, height = 6, dpi = 300)
+```
+

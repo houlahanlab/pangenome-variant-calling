@@ -1,0 +1,323 @@
+---
+title: "figure2_variant_caller_boxplot"
+output: html_document
+---
+
+===============
+# General Setup
+===============
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+
+strelka <- megatable[c("Donor_ID", "Reference", "Strelka_Precision", "Strelka_Recall", "Strelka_F1_Score")]
+somatic <- megatable[c("Donor_ID", "Reference", "Somatic_Precision", "Somatic_Recall", "Somatic_F1_Score")]
+mutect <- megatable[c("Donor_ID", "Reference", "Mutect_Precision", "Mutect_Recall", "Mutect_F1_Score")]
+
+strelka$Variant_Caller <- "Strelka"
+somatic$Variant_Caller <- "SomaticSniper"
+mutect$Variant_Caller <- "Mutect2"
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+caller_colors <- c("#e5d9ff", "#f1a1ff", "#9c8fff")
+black_colors <- c("black", "black", "black")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+```
+
+
+===============
+# Pangenome
+===============
+
+# Filter only Pangenome data 
+```{r}
+strelka_pan <- strelka[strelka$Reference == "Pangenome", ]
+somatic_pan <- somatic[somatic$Reference == "Pangenome", ]
+mutect_pan <- mutect[mutect$Reference == "Pangenome", ]
+
+strelka_pan <- rename_col(strelka_pan)
+somatic_pan <- rename_col(somatic_pan)
+mutect_pan <- rename_col(mutect_pan)
+
+combined_pan <- rbind(strelka_pan, somatic_pan, mutect_pan)
+combined_pan$F1_Score <- as.numeric(combined_pan$F1_Score)
+combined_pan$Precision <- as.numeric(combined_pan$Precision)
+combined_pan$Recall <- as.numeric(combined_pan$Recall)
+combined_pan$Variant_Caller <- factor(
+  combined_pan$Variant_Caller,
+  levels = c("SomaticSniper", "Strelka", "Mutect2")
+)
+```
+
+# Plot Pangenome
+```{r}
+combined_long_pan <- data.frame(
+  Donor_ID = rep(combined_pan$Donor_ID, times = 3),
+  Variant_Caller = rep(combined_pan$Variant_Caller, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(combined_pan)),
+  Value  = c(combined_pan$F1_Score, combined_pan$Precision, combined_pan$Recall)
+)
+
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+```
+
+
+```{r}
+set.seed(1)
+boxplot_pan <- ggplot(combined_long_pan, aes(Metric, Value, fill=Variant_Caller)) + 
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey"                
+  ) +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6,
+    position = dodge) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1,
+    color = "black",
+    size = 0.6,
+    position = dodge) +
+  labs(
+#    title = "Pangenome", 
+    x = element_blank(), 
+    y = "Metric Percentage (%)") +
+  scale_x_discrete(labels = c(
+    "F1_Score" = "F1 Score",
+    "Precision" = "Precision",
+    "Recall" = "Recall"))  +
+  scale_y_continuous(
+    limits = c(-1, 100),
+    breaks = seq(0, 100, 20)) +
+  scale_fill_manual(
+    values = caller_colors,
+    name = "Variant Caller") +
+  scale_color_manual(
+    values = black_colors,
+    name = "Variant Caller",
+    labels = c(
+        "SomaticSniper" = "Somatic Sniper",
+        "Strelka" = "Strelka",
+        "Mutect2" = "Mutect2")) +
+  geom_jitter(
+    size = 2,
+    shape = 21,
+    aes(color = Variant_Caller),
+    fill = NA,
+    alpha = 0.9,
+    position = jitterdodge) +
+  guides(
+    color = guide_legend(override.aes = list(shape = 22,
+                                             size = 6,
+                                             fill = caller_colors, 
+                                             color = "black")), 
+    fill  = "none") +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.91, 0.15),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    # panel.border = element_rect(color = "black", fill = NA, size = 0.5)
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black")
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Pangenome",
+    size = 7,
+    color = "black",
+    hjust = 0,
+    vjust = 2
+  ) +
+  geom_vline(
+    xintercept = c(1.5, 2.5), 
+    linetype = "dashed", 
+    color = "grey", 
+    size = 0.6)
+
+boxplot_pan
+```
+
+# Save Pangenome Plot
+```{r}
+ggsave("./plot/figure1_variant_caller_boxplot_pangenome.pdf", boxplot_pan, width = 13, height = 6, dpi = 300)
+```
+
+===============
+# Linear
+===============
+
+#<!--
+
+# Filter only Linear data 
+```{r}
+strelka_lin <- strelka[strelka$Reference == "Linear", ]
+somatic_lin <- somatic[somatic$Reference == "Linear", ]
+mutect_lin <- mutect[mutect$Reference == "Linear", ]
+
+strelka_lin <- rename_col(strelka_lin)
+somatic_lin <- rename_col(somatic_lin)
+mutect_lin <- rename_col(mutect_lin)
+
+combined_lin <- rbind(strelka_lin, somatic_lin, mutect_lin)
+combined_lin$F1_Score <- as.numeric(combined_lin$F1_Score)
+combined_lin$Precision <- as.numeric(combined_lin$Precision)
+combined_lin$Recall <- as.numeric(combined_lin$Recall)
+combined_lin$Variant_Caller <- factor(
+  combined_lin$Variant_Caller,
+  levels = c("SomaticSniper", "Strelka", "Mutect2")
+)
+```
+
+# Plot Linear
+```{r}
+combined_long_lin <- data.frame(
+  Donor_ID = rep(combined_lin$Donor_ID, times = 3),
+  Variant_Caller = rep(combined_lin$Variant_Caller, times = 3),
+  Metric = rep(c("F1_Score", "Precision", "Recall"), each = nrow(combined_lin)),
+  Value  = c(combined_lin$F1_Score, combined_lin$Precision, combined_lin$Recall)
+)
+
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8)
+
+set.seed(1)
+boxplot_lin <- ggplot(combined_long_lin, aes(Metric, Value, fill=Variant_Caller)) + 
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey"                
+  ) +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6,
+    position = dodge) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1,
+    color = "black",
+    size = 0.6,
+    position = dodge) +
+  labs(
+#    title = "Linear", 
+    x = element_blank(), 
+    y = "Metric Percentage (%)") +
+  scale_x_discrete(labels = c(
+    "F1_Score" = "F1 Score",
+    "Precision" = "Precision",
+    "Recall" = "Recall"))  +
+  scale_y_continuous(
+    limits = c(-1, 100),
+    breaks = seq(0, 100, 20)) +
+  scale_fill_manual(
+    values = caller_colors,
+    name = "Variant Caller",
+    labels = c(
+        "SomaticSniper" = "Somatic Sniper",
+        "Strelka" = "Strelka",
+        "Mutect2" = "Mutect2")) +
+  scale_color_manual(
+    values = black_colors,
+    name = "Variant Caller",
+    labels = c(
+        "SomaticSniper" = "Somatic Sniper",
+        "Strelka" = "Strelka",
+        "Mutect2" = "Mutect2")) +
+  geom_jitter(
+    size = 2,
+    shape = 21,
+    aes(color = Variant_Caller),
+    fill = NA,
+    alpha = 0.9,
+    position = jitterdodge) +
+  guides(
+    color = guide_legend(override.aes = list(shape = 22,
+                                             size = 6,
+                                             fill = caller_colors, 
+                                             color = "black")), 
+    fill  = "none") +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.91, 0.15),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    # panel.border = element_rect(color = "black", fill = NA, size = 0.5)
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black")
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Linear",
+    size = 7,
+    color = "black",
+    hjust = 0,
+    vjust = 2
+  ) +
+  geom_vline(
+    xintercept = c(1.5, 2.5), 
+    linetype = "dashed", 
+    color = "grey", 
+    size = 0.6)
+
+boxplot_lin
+```
+
+# Save Linear Plot
+```{r}
+ggsave("./plot/figure2_variant_caller_boxplot_linear.pdf", boxplot_lin, width = 16, height = 6, dpi = 300)
+```
+

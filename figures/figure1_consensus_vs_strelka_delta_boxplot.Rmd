@@ -1,0 +1,189 @@
+---
+title: "figure2_consensus_vs_strelka_delta_boxplot"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+gc()
+```
+
+# Read in files
+```{r}
+megatable <- read.csv("../data/pangenome_project_megatable.csv")
+consensus <- megatable[c("Donor_ID", "Reference", "Consensus_Precision", "Consensus_Recall", "Consensus_F1_Score")]
+strelka <- megatable[c("Donor_ID", "Reference", "Strelka_Precision", "Strelka_Recall", "Strelka_F1_Score")]
+```
+
+# Setup
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+reference_colors <- c("#C0DEA4", "#72a643")
+black_colors <- c("black", "black")
+```
+
+# Useful functions
+```{r}
+rename_col <- function(df) {
+  colnames(df)[grepl("_Recall$", colnames(df))] <- "Recall"
+  colnames(df)[grepl("_Precision$", colnames(df))] <- "Precision"
+  colnames(df)[grepl("_F1_Score$", colnames(df))] <- "F1_Score"
+  return(df)
+}
+
+as_numeric <- function(df) {
+  df <- df[df$Reference %in% c("Pangenome", "Linear"), ]
+  df$F1_Score <- as.numeric(df$F1_Score)
+  df$Precision <- as.numeric(df$Precision)
+  df$Recall <- as.numeric(df$Recall)
+  return(df)
+}
+
+delta_diff <- function(strelka, consensus) {
+  merged <- merge(
+    strelka, consensus, 
+    by = c("Donor_ID", "Reference"), 
+    suffixes = c("_Strelka", "_Consensus")
+  )
+  
+  result <- data.frame(
+    Donor_ID        = merged$Donor_ID,
+    Reference       = merged$Reference,
+    Delta_Recall    = merged$Recall_Strelka - merged$Recall_Consensus,
+    Delta_Precision = merged$Precision_Strelka - merged$Precision_Consensus,
+    Delta_F1_Score  = merged$F1_Score_Strelka - merged$F1_Score_Consensus
+  )
+  
+  return(result)
+}
+```
+
+# Process
+```{r}
+consensus <- rename_col(consensus)
+strelka <- rename_col(strelka)
+
+consensus <- as_numeric(consensus)
+strelka <- as_numeric(strelka)
+```
+
+# Combine
+```{r}
+combined <- delta_diff(strelka, consensus)
+
+combined_long <- data.frame(
+  Donor_ID = rep(combined$Donor_ID, times = 3),
+  Reference = rep(combined$Reference, times = 3),
+  Metric = rep(c("Delta_F1_Score", "Delta_Precision", "Delta_Recall"), 
+               each = nrow(combined)),
+  Value  = c(combined$Delta_F1_Score, 
+             combined$Delta_Precision, 
+             combined$Delta_Recall)
+)
+```
+
+# Plot
+```{r}
+dodge <- position_dodge(width = 0.8)
+jitterdodge <- position_jitterdodge(jitter.width = 0.1, dodge.width = 0.8)
+
+set.seed(1)
+boxplot_output <- ggplot(combined_long, aes(Metric, Value, fill=Reference)) + 
+  annotate(
+    "rect",
+    xmin = -Inf, xmax = 1.5,      
+    ymin = -Inf, ymax = Inf,   
+    alpha = 0.2,                
+    fill = "grey") +
+  stat_boxplot(
+    geom = "errorbar", 
+    width = 0.3, 
+    color = "black", 
+    size = 0.6,
+    position = dodge) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = "solid", 
+    color = "black", 
+    size = 1) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA,
+    alpha = 1,
+    color = "black",
+    size = 0.6,
+    position = dodge) +
+  labs(
+    # title = plot_title, 
+    x = element_blank(), 
+    y = expression(paste(Delta, " Metric Percentage (%)"))) +
+  scale_x_discrete(labels = c(
+    "Delta_F1_Score" = "F1 Score",
+    "Delta_Precision" = "Precision",
+    "Delta_Recall" = "Recall"))  +
+  scale_y_continuous(
+    limits = c(-40, 56),
+    breaks = seq(-100, 100, 20)) +
+  scale_fill_manual(
+    values = reference_colors) +
+  scale_color_manual(
+    values = black_colors) +
+  geom_jitter(
+    size = 2,
+    shape = 21,
+    aes(color = Reference),
+    fill = NA,
+    alpha = 0.9,
+    position = jitterdodge) +
+  guides(
+    color = guide_legend(
+      override.aes = list(shape = 22,
+                          size = 6,
+                          fill = reference_colors, 
+                          color = "black")), 
+    fill  = "none") +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.88, 0.15),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 18),
+    panel.background = element_rect(fill = "white"),
+    # panel.grid.major.y = element_line(color = "#F0F0F0"),
+    # panel.grid.minor.y = element_line(color = "#F0F0F0"),
+    plot.title = element_text(hjust = 0.5, size = 18),
+    axis.text.x = element_text(size = 18, color = "black"),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.y = element_text(size = 20), 
+    # panel.border = element_rect(color = "black", fill = NA, size = 0.5)
+    panel.border = element_blank(),
+    axis.line.x.bottom = element_line(color = "black"),
+    axis.line.y.left   = element_line(color = "black")
+  ) +
+  annotate(
+    "text",
+    x = 0.5, y = Inf,
+    label = "Strelka - Consensus",
+    size = 6,
+    color = "black",
+    hjust = 0,
+    vjust = 2
+  ) +
+  geom_vline(
+    xintercept = c(1.5, 2.5), 
+    linetype = "dashed", 
+    color = "grey", 
+    size = 0.6)
+
+boxplot_output
+```
+
+# Save plots
+```{r}
+# Change directory when on cluster!!!!!!
+ggsave("./plot/figure1_reference_boxplot_delta_consensus_strelka.pdf", boxplot_output, width = 8, height = 6, dpi = 300)
+```
+
