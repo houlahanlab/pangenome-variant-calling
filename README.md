@@ -7,12 +7,11 @@ This repository has the code used to compare somatic SNV calling with pangenome 
 | Folder | What it has |
 |---|---|
 | `1_pipeline/` | BAM to FASTQ conversion and the alignment / variant calling config |
-| `2_benchmarking/` | Comparison of the calls with MC3, consensus calls, Supplementary Tables 1-3 |
-| `3_analyses/` | False positive, false negative, reference bias and variant impact analyses |
-| `4_figures/` | One R script per figure (BLCA: Figures 1-4 and Supplementary Figures 1-12; LUAD: Figure 5 and Supplementary Figures 13-15) |
+| `2_benchmarking/` | Comparison of the calls with MC3, consensus calls |
+| `3_analyses/` | False positive, false negative, reference bias, germline contamination and variant impact analyses |
+| `4_figures_and_tables/` | One R script per figure (BLCA: Figures 1-4 and Supplementary Figures 1-12; LUAD: Figure 5 and Supplementary Figures 13-15) and Supplementary Tables 1-3 |
 | `source_data/` | The numbers behind each figure panel, one CSV per panel |
 | `metadata/` | Patient lists and ancestry admixture |
-| `2024-2025_scripts/` | Older scripts from early in the project. Not used for the paper |
 
 ## Setup
 
