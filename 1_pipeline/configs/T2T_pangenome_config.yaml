@@ -1,0 +1,68 @@
+---
+# Tool config for the VG pangenome (HPRC v1.1 + T2T-CHM13) alignment and variant calling,
+#
+# Software used:
+#   vg 1.61.0, GATK 4.6.1.0, samtools/bcftools/htslib 1.23.1, Strelka 2.9.10,
+#   SomaticSniper 1.0.5.0, bam-readcount 1.0.1, DeepSomatic 1.10.0
+#
+# Contig names in the graph paths, reference FASTA and resources are CHM13#0#chr*,
+# so no reheader is needed after surject
+
+project_name: T2T_pangenome
+project_directory: /path/to/project/directory
+
+# reference files
+ref_gbz: /path/to/reference/files/hprc-v1.1-mc-chm13.d9.gbz
+ref_dist: /path/to/reference/files/hprc-v1.1-mc-chm13.d9.dist
+ref_min: /path/to/reference/files/hprc-v1.1-mc-chm13.d9.min
+ref_paths: /path/to/reference/files/chm13_paths.txt
+ref_pattern: ''
+
+reference: /path/to/reference/files/CHM13v11Y_test_v1.1.fa
+known_indels: /path/to/reference/files/Homo_sapiens_assembly38.known_indels_T2T-CHM13_edited.vcf
+pon: /path/to/reference/files/1000g_pon.t2t.renamed.sorted.vcf.gz
+germline_resource: /path/to/reference/files/af-only-gnomad.t2t.renamed.vcf.gz
+# Mutect2 was run with Agilent_SureSelect_T2T_GATK_safe.bed.gz (same regions, GATK-compatible BED)
+target_regions: /path/to/reference/files/Agilent_SureSelect_T2T_sorted.bed.gz
+
+# tool versions
+vg_path: 'apptainer exec vg_v1.61.0.sif vg'
+gatk_path: '/path/to/software/gatk-4.6.1.0/gatk'
+samtools_path: 'samtools'
+bcftools_path: 'bcftools'
+bgzip_path: 'bgzip'
+tabix_path: 'tabix'
+
+strelka_path: '/path/to/software/strelka-2.9.10/bin'
+
+somaticsniper_path: '/path/to/software/somatic-sniper'
+readcount_path: 'bam-readcount'
+deepsomatic_path: 'apptainer exec deepsomatic_1.10.0.sif'
+
+# parameters
+giraffe:
+  time: '8:0:0'
+  mem: '64G'
+  cpus: 16
+gatk:
+  time: '8:0:0'
+  mem: '16G'
+  cpus: 4
+strelka:
+  ref: /path/to/reference/files/CHM13v11Y_test_v1.1.fa
+  time: '24:0:0'
+  mem: '16G'
+  cpus: 1
+mutect2:
+  time: '24:0:0'
+  mem: '64G'
+  cpus: 16
+somaticsniper:
+  time: '24:0:0'
+  mem: '10G'
+  cpus: 1
+deepsomatic:
+  model: WES
+  time: '12:0:0'
+  mem: '26G'
+  cpus: 4

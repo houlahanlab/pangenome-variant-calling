@@ -1,0 +1,403 @@
+"DONOR_ID","TUMOUR_ID","Variant_Group","Counted_In","Median_Value","N_Variants"
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",78,497
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",78,497
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",78,497
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",61,105
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",61,105
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",61,105
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",42.5,18
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",42.5,18
+"TCGA-2F-A9KO","TCGA-2F-A9KO-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",42.5,18
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",58,135
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",58,135
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",58,135
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",33.5,6
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",33.5,6
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",32,6
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",41,4
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",41.5,4
+"TCGA-2F-A9KP","TCGA-2F-A9KP-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",41.5,4
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",66,63
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",67,63
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",67,63
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",75,2
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",74,2
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",53,2
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",77,1
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",78,1
+"TCGA-2F-A9KQ","TCGA-2F-A9KQ-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",78,1
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",61,349
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",62,349
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",62,349
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",31.5,28
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",31.5,28
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",31.5,28
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",15,13
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",15,13
+"TCGA-2F-A9KT","TCGA-2F-A9KT-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",15,13
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",75,113
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",75,113
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",75,113
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",69,5
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",71,5
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",71,5
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",17,6
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",17,6
+"TCGA-2F-A9KW","TCGA-2F-A9KW-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",17,6
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",57,525
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Found by both","VG_GRCh38_linear",58,525
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Found by both","VG_T2T_pangenome",58,525
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",37,41
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",37,41
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",37,41
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",30,21
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",30,21
+"TCGA-4Z-AA7M","TCGA-4Z-AA7M-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",30,21
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",76,2
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Found by both","VG_GRCh38_linear",76,2
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Found by both","VG_T2T_pangenome",75.5,2
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",86,16
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",87,16
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",87.5,16
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",42,3
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",42,3
+"TCGA-4Z-AA7N","TCGA-4Z-AA7N-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",42,3
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",63,170
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Found by both","VG_GRCh38_linear",64,170
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Found by both","VG_T2T_pangenome",64,170
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",68.5,88
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",69,88
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",68.5,88
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",45,17
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",46,17
+"TCGA-4Z-AA7Q","TCGA-4Z-AA7Q-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",46,17
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",74,453
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Found by both","VG_GRCh38_linear",73,453
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Found by both","VG_T2T_pangenome",74,453
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",61.5,114
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",62,114
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",62,114
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",41,39
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",40,39
+"TCGA-4Z-AA7W","TCGA-4Z-AA7W-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",42,39
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",62,311
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Found by both","VG_GRCh38_linear",62,311
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Found by both","VG_T2T_pangenome",62,311
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",62.5,22
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",61.5,22
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",53,22
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",21,3
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",21,3
+"TCGA-4Z-AA7Y","TCGA-4Z-AA7Y-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",19,3
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",66,165
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Found by both","VG_GRCh38_linear",67,165
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Found by both","VG_T2T_pangenome",67,165
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",67,57
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",67,57
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",68,57
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",38.5,14
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",38.5,14
+"TCGA-4Z-AA86","TCGA-4Z-AA86-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",38.5,14
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Found by both","BWA_GRCh38_linear",77.5,36
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Found by both","VG_GRCh38_linear",78,36
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Found by both","VG_T2T_pangenome",78,36
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by VG pangenome","BWA_GRCh38_linear",97,41
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by VG pangenome","VG_GRCh38_linear",97,41
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by VG pangenome","VG_T2T_pangenome",97,41
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by both","BWA_GRCh38_linear",52,14
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by both","VG_GRCh38_linear",52.5,14
+"TCGA-BT-A20W","TCGA-BT-A20W-01A-21D-A14W-08","Missed by both","VG_T2T_pangenome",53,14
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Found by both","BWA_GRCh38_linear",66,77
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Found by both","VG_GRCh38_linear",66,77
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Found by both","VG_T2T_pangenome",66,77
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",94,34
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",94.5,34
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",94,34
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by both","BWA_GRCh38_linear",79,4
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by both","VG_GRCh38_linear",80,4
+"TCGA-BT-A2LD","TCGA-BT-A2LD-01A-12D-A20D-08","Missed by both","VG_T2T_pangenome",80,4
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Found by both","BWA_GRCh38_linear",107,306
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Found by both","VG_GRCh38_linear",108,306
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Found by both","VG_T2T_pangenome",107.5,306
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by VG pangenome","BWA_GRCh38_linear",158,83
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by VG pangenome","VG_GRCh38_linear",156,83
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by VG pangenome","VG_T2T_pangenome",149,83
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by both","BWA_GRCh38_linear",51.5,14
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by both","VG_GRCh38_linear",51.5,14
+"TCGA-BT-A42C","TCGA-BT-A42C-01A-11D-A23M-08","Missed by both","VG_T2T_pangenome",51.5,14
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Found by both","BWA_GRCh38_linear",107,177
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Found by both","VG_GRCh38_linear",107,177
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Found by both","VG_T2T_pangenome",107,177
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by VG pangenome","BWA_GRCh38_linear",109,115
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by VG pangenome","VG_GRCh38_linear",110,115
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by VG pangenome","VG_T2T_pangenome",109,115
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by both","BWA_GRCh38_linear",41,35
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by both","VG_GRCh38_linear",41,35
+"TCGA-CF-A1HR","TCGA-CF-A1HR-01A-11D-A13W-08","Missed by both","VG_T2T_pangenome",40,35
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Found by both","BWA_GRCh38_linear",94,181
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Found by both","VG_GRCh38_linear",95,181
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Found by both","VG_T2T_pangenome",95,181
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by VG pangenome","BWA_GRCh38_linear",130.5,94
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by VG pangenome","VG_GRCh38_linear",128.5,94
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by VG pangenome","VG_T2T_pangenome",131,94
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by both","BWA_GRCh38_linear",48.5,28
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by both","VG_GRCh38_linear",49.5,28
+"TCGA-CF-A1HS","TCGA-CF-A1HS-01A-11D-A13W-08","Missed by both","VG_T2T_pangenome",50,28
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Found by both","BWA_GRCh38_linear",94,20
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Found by both","VG_GRCh38_linear",95.5,20
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Found by both","VG_T2T_pangenome",95.5,20
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by VG pangenome","BWA_GRCh38_linear",49.5,2
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by VG pangenome","VG_GRCh38_linear",49,2
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by VG pangenome","VG_T2T_pangenome",49,2
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by both","BWA_GRCh38_linear",47,3
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by both","VG_GRCh38_linear",46,3
+"TCGA-CF-A3MF","TCGA-CF-A3MF-01A-12D-A21A-08","Missed by both","VG_T2T_pangenome",46,3
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Found by both","BWA_GRCh38_linear",56,145
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Found by both","VG_GRCh38_linear",57,145
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Found by both","VG_T2T_pangenome",57,145
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",42.5,14
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",42.5,14
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",42.5,14
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by both","BWA_GRCh38_linear",41.5,6
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by both","VG_GRCh38_linear",41,6
+"TCGA-CF-A3MG","TCGA-CF-A3MG-01A-11D-A20D-08","Missed by both","VG_T2T_pangenome",41,6
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Found by both","BWA_GRCh38_linear",76.5,38
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Found by both","VG_GRCh38_linear",74,38
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Found by both","VG_T2T_pangenome",74.5,38
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",84.5,6
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",82.5,6
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",82.5,6
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by both","BWA_GRCh38_linear",85,3
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by both","VG_GRCh38_linear",83,3
+"TCGA-CF-A3MH","TCGA-CF-A3MH-01A-11D-A20D-08","Missed by both","VG_T2T_pangenome",81,3
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Found by both","BWA_GRCh38_linear",75,65
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Found by both","VG_GRCh38_linear",75,65
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Found by both","VG_T2T_pangenome",75,65
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",49,9
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",50,9
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",51,9
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by both","BWA_GRCh38_linear",39,7
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by both","VG_GRCh38_linear",39,7
+"TCGA-CF-A3MI","TCGA-CF-A3MI-01A-11D-A20D-08","Missed by both","VG_T2T_pangenome",39,7
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Found by both","BWA_GRCh38_linear",41,21
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Found by both","VG_GRCh38_linear",41,21
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Found by both","VG_T2T_pangenome",41,21
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by VG pangenome","BWA_GRCh38_linear",68,4
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by VG pangenome","VG_GRCh38_linear",68,4
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by VG pangenome","VG_T2T_pangenome",68,4
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by both","BWA_GRCh38_linear",31.5,2
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by both","VG_GRCh38_linear",32,2
+"TCGA-CF-A47S","TCGA-CF-A47S-01A-11D-A23U-08","Missed by both","VG_T2T_pangenome",33,2
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Found by both","BWA_GRCh38_linear",71,21
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Found by both","VG_GRCh38_linear",70,21
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Found by both","VG_T2T_pangenome",70,21
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by VG pangenome","BWA_GRCh38_linear",65.5,4
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by VG pangenome","VG_GRCh38_linear",66,4
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by VG pangenome","VG_T2T_pangenome",66,4
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by both","BWA_GRCh38_linear",30,4
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by both","VG_GRCh38_linear",30,4
+"TCGA-CF-A47T","TCGA-CF-A47T-01A-11D-A23U-08","Missed by both","VG_T2T_pangenome",30,4
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Found by both","BWA_GRCh38_linear",47.5,86
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Found by both","VG_GRCh38_linear",48,86
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Found by both","VG_T2T_pangenome",48.5,86
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by VG pangenome","BWA_GRCh38_linear",77,9
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by VG pangenome","VG_GRCh38_linear",79,9
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by VG pangenome","VG_T2T_pangenome",79,9
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by both","BWA_GRCh38_linear",34,2
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by both","VG_GRCh38_linear",35,2
+"TCGA-CF-A47V","TCGA-CF-A47V-01A-11D-A23U-08","Missed by both","VG_T2T_pangenome",34.5,2
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Found by both","BWA_GRCh38_linear",48,60
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Found by both","VG_GRCh38_linear",48,60
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Found by both","VG_T2T_pangenome",48,60
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by VG pangenome","BWA_GRCh38_linear",50.5,4
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by VG pangenome","VG_GRCh38_linear",46,4
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by VG pangenome","VG_T2T_pangenome",51,4
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by both","BWA_GRCh38_linear",36,5
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by both","VG_GRCh38_linear",36,5
+"TCGA-CF-A8HX","TCGA-CF-A8HX-01A-11D-A364-08","Missed by both","VG_T2T_pangenome",37,5
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Found by both","BWA_GRCh38_linear",51,107
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Found by both","VG_GRCh38_linear",52,107
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Found by both","VG_T2T_pangenome",52,107
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by VG pangenome","BWA_GRCh38_linear",52,8
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by VG pangenome","VG_GRCh38_linear",52,8
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by VG pangenome","VG_T2T_pangenome",52,8
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by both","BWA_GRCh38_linear",11,1
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by both","VG_GRCh38_linear",11,1
+"TCGA-CU-A72E","TCGA-CU-A72E-01A-12D-A339-08","Missed by both","VG_T2T_pangenome",11,1
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Found by both","BWA_GRCh38_linear",90.5,410
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Found by both","VG_GRCh38_linear",91,410
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Found by both","VG_T2T_pangenome",91,410
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by VG pangenome","BWA_GRCh38_linear",106.5,94
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by VG pangenome","VG_GRCh38_linear",107.5,94
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by VG pangenome","VG_T2T_pangenome",106.5,94
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by both","BWA_GRCh38_linear",88.5,14
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by both","VG_GRCh38_linear",86.5,14
+"TCGA-E5-A4TZ","TCGA-E5-A4TZ-01A-11D-A31L-08","Missed by both","VG_T2T_pangenome",85.5,14
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",71,199
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",71,199
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",71,199
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",47,20
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",47,20
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",47,20
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",30,8
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",29.5,8
+"TCGA-E7-A97P","TCGA-E7-A97P-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",29.5,8
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Found by both","BWA_GRCh38_linear",69,135
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Found by both","VG_GRCh38_linear",69,135
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Found by both","VG_T2T_pangenome",70,135
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",82,23
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",84,23
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",83,23
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by both","BWA_GRCh38_linear",55,4
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by both","VG_GRCh38_linear",55,4
+"TCGA-FD-A3B5","TCGA-FD-A3B5-01A-11D-A20D-08","Missed by both","VG_T2T_pangenome",55,4
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Found by both","BWA_GRCh38_linear",67.5,50
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Found by both","VG_GRCh38_linear",66.5,50
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Found by both","VG_T2T_pangenome",66,50
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",64.5,20
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",64,20
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",64,20
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by both","BWA_GRCh38_linear",37,7
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by both","VG_GRCh38_linear",37,7
+"TCGA-FD-A3B7","TCGA-FD-A3B7-01A-31D-A20D-08","Missed by both","VG_T2T_pangenome",37,7
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Found by both","BWA_GRCh38_linear",61.5,330
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Found by both","VG_GRCh38_linear",61,330
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Found by both","VG_T2T_pangenome",61,330
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by VG pangenome","BWA_GRCh38_linear",40,19
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by VG pangenome","VG_GRCh38_linear",40,19
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by VG pangenome","VG_T2T_pangenome",40,19
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by both","BWA_GRCh38_linear",22,7
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by both","VG_GRCh38_linear",23,7
+"TCGA-FD-A3N5","TCGA-FD-A3N5-01A-11D-A21A-08","Missed by both","VG_T2T_pangenome",23,7
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Found by both","BWA_GRCh38_linear",89,114
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Found by both","VG_GRCh38_linear",89,114
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Found by both","VG_T2T_pangenome",89.5,114
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by VG pangenome","BWA_GRCh38_linear",102,10
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by VG pangenome","VG_GRCh38_linear",102.5,10
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by VG pangenome","VG_T2T_pangenome",102,10
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by both","BWA_GRCh38_linear",43.5,4
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by both","VG_GRCh38_linear",44.5,4
+"TCGA-FD-A3N6","TCGA-FD-A3N6-01A-11D-A21A-08","Missed by both","VG_T2T_pangenome",44.5,4
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Found by both","BWA_GRCh38_linear",58,390
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Found by both","VG_GRCh38_linear",58,390
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Found by both","VG_T2T_pangenome",58,390
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by VG pangenome","BWA_GRCh38_linear",47,60
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by VG pangenome","VG_GRCh38_linear",47,60
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by VG pangenome","VG_T2T_pangenome",47,60
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by both","BWA_GRCh38_linear",32.5,28
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by both","VG_GRCh38_linear",32.5,28
+"TCGA-FD-A43P","TCGA-FD-A43P-01A-31D-A23U-08","Missed by both","VG_T2T_pangenome",32.5,28
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Found by both","BWA_GRCh38_linear",62,61
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Found by both","VG_GRCh38_linear",62,61
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Found by both","VG_T2T_pangenome",62,61
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by VG pangenome","BWA_GRCh38_linear",55,15
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by VG pangenome","VG_GRCh38_linear",56,15
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by VG pangenome","VG_T2T_pangenome",57,15
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by both","BWA_GRCh38_linear",24,2
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by both","VG_GRCh38_linear",24,2
+"TCGA-FD-A5BU","TCGA-FD-A5BU-01A-31D-A26M-08","Missed by both","VG_T2T_pangenome",24.5,2
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Found by both","BWA_GRCh38_linear",112,63
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Found by both","VG_GRCh38_linear",114,63
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Found by both","VG_T2T_pangenome",114,63
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by VG pangenome","BWA_GRCh38_linear",72.5,18
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by VG pangenome","VG_GRCh38_linear",74,18
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by VG pangenome","VG_T2T_pangenome",75,18
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by both","BWA_GRCh38_linear",45,6
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by both","VG_GRCh38_linear",45,6
+"TCGA-FD-A62S","TCGA-FD-A62S-01A-11D-A30E-08","Missed by both","VG_T2T_pangenome",42.5,6
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Found by both","BWA_GRCh38_linear",60,967
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Found by both","VG_GRCh38_linear",60,967
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Found by both","VG_T2T_pangenome",60,967
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by VG pangenome","BWA_GRCh38_linear",40,71
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by VG pangenome","VG_GRCh38_linear",40,71
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by VG pangenome","VG_T2T_pangenome",39,71
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by both","BWA_GRCh38_linear",29.5,24
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by both","VG_GRCh38_linear",29.5,24
+"TCGA-FD-A6TC","TCGA-FD-A6TC-01A-21D-A339-08","Missed by both","VG_T2T_pangenome",29.5,24
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Found by both","BWA_GRCh38_linear",55,92
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Found by both","VG_GRCh38_linear",54.5,92
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Found by both","VG_T2T_pangenome",55,92
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Missed by VG pangenome","BWA_GRCh38_linear",43,3
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Missed by VG pangenome","VG_GRCh38_linear",39,3
+"TCGA-G2-A3IB","TCGA-G2-A3IB-01A-11D-A20D-08","Missed by VG pangenome","VG_T2T_pangenome",47,3
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Found by both","BWA_GRCh38_linear",68,189
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Found by both","VG_GRCh38_linear",69,189
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Found by both","VG_T2T_pangenome",69,189
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by VG pangenome","BWA_GRCh38_linear",61,60
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by VG pangenome","VG_GRCh38_linear",61.5,60
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by VG pangenome","VG_T2T_pangenome",61.5,60
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by both","BWA_GRCh38_linear",46,19
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by both","VG_GRCh38_linear",46,19
+"TCGA-GC-A6I3","TCGA-GC-A6I3-01A-11D-A31L-08","Missed by both","VG_T2T_pangenome",46,19
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Found by both","BWA_GRCh38_linear",81,255
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Found by both","VG_GRCh38_linear",82,255
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Found by both","VG_T2T_pangenome",81,255
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by VG pangenome","BWA_GRCh38_linear",15,5
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by VG pangenome","VG_GRCh38_linear",15,5
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by VG pangenome","VG_T2T_pangenome",15,5
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by both","BWA_GRCh38_linear",36,6
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by both","VG_GRCh38_linear",32,6
+"TCGA-KQ-A41O","TCGA-KQ-A41O-01A-12D-A34U-08","Missed by both","VG_T2T_pangenome",36,6
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Found by both","BWA_GRCh38_linear",81,131
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Found by both","VG_GRCh38_linear",81,131
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Found by both","VG_T2T_pangenome",81,131
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by VG pangenome","BWA_GRCh38_linear",74,14
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by VG pangenome","VG_GRCh38_linear",74.5,14
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by VG pangenome","VG_T2T_pangenome",74.5,14
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by both","BWA_GRCh38_linear",35.5,4
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by both","VG_GRCh38_linear",36,4
+"TCGA-LC-A66R","TCGA-LC-A66R-01A-41D-A30E-08","Missed by both","VG_T2T_pangenome",36.5,4
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Found by both","BWA_GRCh38_linear",62,241
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Found by both","VG_GRCh38_linear",62,241
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Found by both","VG_T2T_pangenome",63,241
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by VG pangenome","BWA_GRCh38_linear",54,12
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by VG pangenome","VG_GRCh38_linear",54,12
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by VG pangenome","VG_T2T_pangenome",54,12
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by both","BWA_GRCh38_linear",62,7
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by both","VG_GRCh38_linear",62,7
+"TCGA-S5-AA26","TCGA-S5-AA26-01A-11D-A38G-08","Missed by both","VG_T2T_pangenome",62,7
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Found by both","BWA_GRCh38_linear",71,137
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Found by both","VG_GRCh38_linear",72,137
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Found by both","VG_T2T_pangenome",72,137
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by VG pangenome","BWA_GRCh38_linear",94,27
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by VG pangenome","VG_GRCh38_linear",93,27
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by VG pangenome","VG_T2T_pangenome",91,27
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by both","BWA_GRCh38_linear",52,4
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by both","VG_GRCh38_linear",52.5,4
+"TCGA-UY-A78M","TCGA-UY-A78M-01A-21D-A34U-08","Missed by both","VG_T2T_pangenome",52.5,4
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Found by both","BWA_GRCh38_linear",62,84
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Found by both","VG_GRCh38_linear",62,84
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Found by both","VG_T2T_pangenome",62.5,84
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by VG pangenome","BWA_GRCh38_linear",51,17
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by VG pangenome","VG_GRCh38_linear",51,17
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by VG pangenome","VG_T2T_pangenome",41,17
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by both","BWA_GRCh38_linear",39,6
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by both","VG_GRCh38_linear",39,6
+"TCGA-UY-A8OD","TCGA-UY-A8OD-01A-11D-A364-08","Missed by both","VG_T2T_pangenome",39,6
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Found by both","BWA_GRCh38_linear",55,163
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Found by both","VG_GRCh38_linear",55,163
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Found by both","VG_T2T_pangenome",55,163
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by VG pangenome","BWA_GRCh38_linear",53,7
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by VG pangenome","VG_GRCh38_linear",53,7
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by VG pangenome","VG_T2T_pangenome",53,7
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by both","BWA_GRCh38_linear",29,4
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by both","VG_GRCh38_linear",29,4
+"TCGA-XF-A8HC","TCGA-XF-A8HC-01A-11D-A364-08","Missed by both","VG_T2T_pangenome",29,4
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Found by both","BWA_GRCh38_linear",73,181
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Found by both","VG_GRCh38_linear",73,181
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Found by both","VG_T2T_pangenome",73,181
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by VG pangenome","BWA_GRCh38_linear",81.5,178
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by VG pangenome","VG_GRCh38_linear",81.5,178
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by VG pangenome","VG_T2T_pangenome",81,178
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by both","BWA_GRCh38_linear",54,43
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by both","VG_GRCh38_linear",55,43
+"TCGA-XF-A9SI","TCGA-XF-A9SI-01A-11D-A391-08","Missed by both","VG_T2T_pangenome",55,43
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Found by both","BWA_GRCh38_linear",52,341
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Found by both","VG_GRCh38_linear",53,341
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Found by both","VG_T2T_pangenome",53,341
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by VG pangenome","BWA_GRCh38_linear",25.5,12
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by VG pangenome","VG_GRCh38_linear",26,12
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by VG pangenome","VG_T2T_pangenome",25.5,12
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by both","BWA_GRCh38_linear",49,10
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by both","VG_GRCh38_linear",49,10
+"TCGA-XF-AAMX","TCGA-XF-AAMX-01A-11D-A42E-08","Missed by both","VG_T2T_pangenome",48.5,10

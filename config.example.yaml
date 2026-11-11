@@ -1,0 +1,70 @@
+# Copy to config.yaml and set the paths for your system.
+# Scripts are run from the repository root and read this file.
+
+# Outputs of benchmarking and analyses
+data_dir: /path/to/data
+
+# Where figures are written
+plots_dir: plots
+
+# TCGA BAMs from the GDC (BWA GRCh38): <tcga_bams_dir>/<donor>/<sample>/<barcode>.bam
+tcga_bams_dir: /path/to/tcga/bams
+
+# FASTQs made from them (1_pipeline/bam_to_fastq.py), the input to pangenome-pipeline
+fastq_dir: /path/to/tcga/fastqs
+
+# Somatic calls from pangenome-pipeline:
+#   <calls_dir>/<caller>/<alignment>/<donor>/<tumour>/<tumour>_<caller>_pass_variants.vcf.gz
+calls_dir: /path/to/variant-calling
+
+# Where the depth- and target-filtered calls are written (same layout as calls_dir)
+filtered_calls_dir: /path/to/variant-calling
+
+# Alignments from pangenome-pipeline (BAMs and GATK alignment summary tables):
+#   <alignments_dir>/<alignment>/<donor>/<sample>/
+alignments_dir: /path/to/alignments
+
+# Per-variant tables combining MC3 and the four callers (pangenome-pipeline results), for Figure 1e and 1g
+variant_tables_dir: /path/to/results/variants
+
+# Per-variant read depth and quality tables (pangenome-pipeline results), for Supplementary Figure 11
+quality_scores_dir: /path/to/results/quality_scores
+
+resources:
+  # MC3 somatic mutations lifted to GRCh38
+  mc3_maf: /path/to/mc3.v0.2.8.PUBLIC_hg19ToHg38.maf.gz
+  # Agilent SureSelect Human All Exon V5 targets (GRCh38 and lifted to T2T-CHM13)
+  target_bed_grch38: /path/to/Agilent_SureSelect_All_Exon_V5.bed.gz
+  target_bed_t2t: /path/to/Agilent_SureSelect_T2T_sorted.bed.gz
+  # Reference genomes: GRCh38 (GDC GRCh38.d1.vd1), its primary contigs only (used for VG GRCh38), T2T-CHM13 v1.1
+  fasta_grch38: /path/to/GRCh38.d1.vd1.fa
+  fasta_grch38_primary: /path/to/GRCh38.d1.vd1_primary_only.fa
+  fasta_t2t: /path/to/CHM13v11Y.fa
+  # GRCh38 -> T2T-CHM13 liftover chain
+  chain_grch38_to_t2t: /path/to/grch38-chm13v2_fixed.chain
+  # The same chain with contigs named 1, 2, ..., X instead of CHM13#0#chr1, ...
+  chain_grch38_to_t2t_bare: /path/to/grch38-chm13v2_renamed.chain
+  # T2T-CHM13 -> GRCh38 liftover chain
+  chain_t2t_to_grch38: /path/to/chm13v2-grch38_fixed.chain
+  # MC3 sites without enough expected depth in the VG pangenome alignments
+  noncallable_sites: /path/to/T2Thprcv1.1_expected_variant_depths_NOT_callable.tsv
+  # gnomAD (GATK af-only resource, biallelic SNVs; GRCh38 and lifted to T2T-CHM13)
+  gnomad_grch38: /path/to/af-only-gnomad.hg38.biallelic_snvs.vcf.gz
+  gnomad_t2t: /path/to/af-only-gnomad.t2t.renamed.vcf.gz
+  # Cancer driver genes (Bailey et al. 2018)
+  driver_genes: /path/to/cancer_driver_gene_list.xlsx
+
+tools:
+  bcftools: bcftools
+  bedtools: bedtools
+  bgzip: bgzip
+  tabix: tabix
+  liftover: liftOver
+  rscript: Rscript
+  gatk: gatk
+  samtools: samtools
+  # SnpEff jar (run with java, database GRCh38.86)
+  snpeff: /path/to/snpEff.jar
+
+# Extra sbatch options for your cluster (e.g. --partition=...), added to the sbatch commands that scripts print
+slurm_options: ""

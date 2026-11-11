@@ -1,0 +1,9 @@
+"gene","ancestry","category","variants"
+"CDKN1A","EAA_Patients","BOTH",1
+"KMT2C","AA_Patients","BOTH",1
+"KMT2C","EA_Patients","BOTH",1
+"KMT2C","EAA_Patients","BOTH",2
+"TP53","EA_Patients","BOTH",1
+"ARID2","AA_Patients","PANCAN",1
+"CACNA1A","AA_Patients","PANCAN",1
+"TBX3","EA_Patients","PANCAN",1

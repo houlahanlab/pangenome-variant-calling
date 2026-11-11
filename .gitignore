@@ -1,0 +1,5 @@
+config.yaml
+Rplots.pdf
+*.log
+__pycache__/
+.DS_Store
